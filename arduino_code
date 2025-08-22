@@ -1,0 +1,26 @@
+# arduino code 
+
+// Joystick pins
+const int joyX = A0;
+const int joyY = A1;
+const int joyButton = 2;
+
+void setup() {
+  Serial.begin(9600);        // Start Serial at 9600 baud
+  pinMode(joyButton, INPUT_PULLUP); // Joystick button (active LOW)
+}
+
+void loop() {
+  int xValue = analogRead(joyX);   // Read X-axis (0–1023)
+  int yValue = analogRead(joyY);   // Read Y-axis (0–1023)
+  int buttonState = digitalRead(joyButton); // Button state
+
+  // Send data as "x,y,button"
+  Serial.print(xValue);
+  Serial.print(",");
+  Serial.print(yValue);
+  Serial.print(",");
+  Serial.println(buttonState);
+
+  delay(50);  // small delay to avoid flooding Serial
+}
